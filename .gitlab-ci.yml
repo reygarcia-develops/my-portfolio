@@ -12,15 +12,18 @@ build:
   stage: build
   script:
     - npm install
-    - npm run build --prod
+    - npm run build -- --output-path=docs --base-href=/my-portfolio/
   artifacts:
     paths:
-      - dist/
+      - docs/
 
 pages:
   stage: deploy
   script:
-    - mv dist/* public
-  artifacts:
-    paths:
-      - public
+    - git config --global user.email "reygarcia.develops@gmail..com"
+    - git config --global user.name "Rey Garcia"
+    - git add docs -f
+    - git commit -m "Deploy to GitHub Pages" || true
+    - git push origin main
+  only:
+    - main
