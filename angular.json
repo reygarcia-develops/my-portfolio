@@ -15,6 +15,7 @@
       "prefix": "app",
       "architect": {
         "build": {
+          "baseHref": "/my-portolio/",
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/my-portfolio",
@@ -98,5 +99,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

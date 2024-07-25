@@ -1,0 +1,16 @@
+<header class="header-container">
+  <div class="name-container">
+    <span class="name">{{headerContent.title}}</span>
+    <span class="subtitle">{{headerContent.subtitle}}</span>
+  </div>
+
+  <nav>
+    <ul class="nav-list">
+      @for (item of navList; track item) {
+        <li>
+          <a (click)="emitSectionToNavigateTo(item.id)">{{ item.label }}</a>
+        </li>
+      }
+    </ul>
+  </nav>
+</header>

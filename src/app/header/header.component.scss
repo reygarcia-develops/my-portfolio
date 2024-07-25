@@ -1,0 +1,135 @@
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.header-container {
+  align-items: center;
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  min-height: 80px;
+  padding: 0 50px;
+  position: relative;
+
+  .name-container {
+    align-items: baseline;
+    display: flex;
+
+    .name {
+      font-size: 1.8rem;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      padding-right: 15px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .subtitle {
+      color: #989898;
+      font-size: 0.8rem;
+    }
+  }
+
+  .nav-list {
+    display: flex;
+
+    li {
+      color: #989898;
+      position: relative;
+      transition: color 0.5s ease;
+
+      &:not(:last-child) {
+        margin-right: 25px;
+      }
+
+      &::after {
+        animation: rgb-underline 2s linear infinite;
+        background-size: 200% 200%; // Ensure smooth gradient
+        background: linear-gradient(90deg, #c6ffdd, #fbd786, #f7797d);
+        bottom: -5px;
+        content: "";
+        height: 2px;
+        left: 0;
+        position: absolute;
+        transform-origin: bottom left;
+        transform: scaleX(0); // Initially hidden
+        transition: transform 0.3s ease;
+        width: 100%;
+      }
+
+      &:hover {
+        color: #f0f0f0;
+
+        &::after {
+          transform: scaleX(1); // Expands the underline to full width on hover
+        }
+      }
+    }
+  }
+
+  // Handles the animation for the header
+  &::after,
+  &::before {
+    background-image: conic-gradient(
+      from var(--angle),
+      #c6ffdd,
+      #fbd786,
+      #f7797d,
+      #fbd786,
+      #c6ffdd
+    );
+
+    border-radius: 20px;
+    box-sizing: border-box;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    padding: 3px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition: opacity 0.3s ease; /* Smooth transition */
+    width: 100%;
+    z-index: -1;
+  }
+
+  &:hover {
+    &::after,
+    &::before {
+      animation: spin 2s linear infinite;
+      opacity: 0.5;
+      transition: opacity 1s ease;
+    }
+
+    &::before {
+      filter: blur(1.5rem);
+    }
+  }
+}
+
+// Keyframes for infinite RGB underline animation
+@keyframes rgb-underline {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%; // Smooth horizontal gradient transition
+  }
+}
+
+// Keyframes for spinning effect
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}

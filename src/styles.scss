@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'normalize.css/normalize.css';
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #000000ed;
+  color: #f0f0f0;
+  font-size: 1rem;
+  line-height: 1.5;;
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  margin: 30px;
+
+}
+
+ol, ul {
+  list-style: none;
+
+  li {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
