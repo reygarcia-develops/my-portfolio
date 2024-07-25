@@ -13,6 +13,7 @@ build:
   script:
     - npm install
     - npm run build -- --output-path=docs --base-href=/my-portfolio/
+    - touch docs/.nojekyll  # Disable Jekyll
   artifacts:
     paths:
       - docs/
