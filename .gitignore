@@ -40,3 +40,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Jekyll
+/_site/
+/.sass-cache/
+/.jekyll-cache/
+/.nojekyll
