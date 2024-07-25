@@ -13,7 +13,7 @@ build:
   script:
     - npm install
     - npm run build -- --output-path=docs --base-href=/my-portfolio/
-    - touch docs/.nojekyll  # Disable Jekyll
+    - touch docs/.nojekyll  # Create .nojekyll file to disable Jekyll
   artifacts:
     paths:
       - docs/
@@ -21,9 +21,11 @@ build:
 pages:
   stage: deploy
   script:
-    - git config --global user.email "reygarcia.develops@gmail..com"
-    - git config --global user.name "Rey Garcia"
-    - git add docs -f
+    - git config --global user.email "you@example.com"
+    - git config --global user.name "Your Name"
+    - cp -r docs/* .  # Copy built files to the root
+    - touch .nojekyll  # Ensure .nojekyll is at the root
+    - git add . -f
     - git commit -m "Deploy to GitHub Pages" || true
     - git push origin main
   only:
