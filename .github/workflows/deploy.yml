@@ -1,5 +1,6 @@
 name: Build and Deploy
 
+# Define the event that triggers the workflow
 on:
   push:
     branches:
@@ -10,20 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Step 2: Set up the Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
+      # Step 3: Cache node_modules to speed up workflow
       - name: Cache node_modules
         uses: actions/cache@v4
         with:
           path: |
             node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} # unique key for the cache and a fallback key for cache restory
           restore-keys: |
             ${{ runner.os }}-node-
 
@@ -33,6 +37,7 @@ jobs:
       - name: Build Angular app
         run: npm run build:prod
 
+      # Step 6: Deploy the build output to GithubPages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:

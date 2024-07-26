@@ -4,7 +4,42 @@
 
   section {
     display: flex;
-    justify-content: center;;
-    min-height: 800px;
+    min-height: 300px;
+    flex-direction: column;
+
+    .title {
+      font-size: clamp(.8rem, 1rem + 1vw, 1.8rem);
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 50px;
+
+      .image-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .avatar {
+          width: 150px;
+          aspect-ratio: 1;
+          object-fit: cover;
+          border-radius: 100vw;
+          border: 5px solid white;
+          box-shadow: .25rem .25rem .5rem;
+          margin-bottom: 20px;
+        }
+      }
+      .summary {
+        margin-top: 20px;
+      }
+
+    }
   }
 }

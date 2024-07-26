@@ -1,8 +1,18 @@
 <app-header (sectionChanged)="navigateToSection($event)"></app-header>
 <main class="main">
-  <section id="aboutMe">About me</section>
-  <section id="portfolio">Portfolio</section>
-  <section id="contactMe">Contact me</section>
-  <section id="experience">Experience</section>
+  <section id="aboutMe">
+    <div class="title">About me</div>
+    <div class="section-content">
+      <div class="image-content">
+        <img class="avatar" src="https://placehold.co/600x400/png" />
+        <div>Name, email, phone, position</div>
+      </div>
+      <div class="summary">More info about me here</div>
+    </div>
+  </section>
+  <section id="portfolio">
+    <div class="title">Portfolio</div>
+  </section>
+  <section id="contactMe"><div class="title">Contact me</div></section>
+  <section id="experience"><div class="title">Experience</div></section>
 </main>
-
