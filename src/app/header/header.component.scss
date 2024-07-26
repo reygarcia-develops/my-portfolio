@@ -20,7 +20,7 @@
     display: flex;
 
     .name {
-      font-size: 1.8rem;
+      font-size: clamp(.8rem, 1rem + 1vw, 1.8rem);
       font-family: "Cormorant Garamond", serif;
       font-weight: 700;
       padding-right: 15px;
@@ -31,47 +31,71 @@
     }
 
     .subtitle {
+      display: block;
       color: #989898;
-      font-size: 0.8rem;
+      font-size: clamp(0.5em, 0.6rem + 0.5vw, 0.8rem);
     }
   }
 
-  .nav-list {
+  .menu {
+    cursor: pointer;
     display: flex;
+    flex-direction: column;;
 
-    li {
-      color: #989898;
-      position: relative;
-      transition: color 0.5s ease;
+    span {
+      background: linear-gradient(90deg, #c6ffdd, #fbd786, #f7797d);;
+      border-radius: 2px;
+      display: block;
+      height: 2px;
+      margin: 4px 0;
+      width: 25px;
+    }
+  }
 
-      &:not(:last-child) {
-        margin-right: 25px;
-      }
+  nav {
+    display: none;
 
-      &::after {
-        animation: rgb-underline 2s linear infinite;
-        background-size: 200% 200%; // Ensure smooth gradient
-        background: linear-gradient(90deg, #c6ffdd, #fbd786, #f7797d);
-        bottom: -5px;
-        content: "";
-        height: 2px;
-        left: 0;
-        position: absolute;
-        transform-origin: bottom left;
-        transform: scaleX(0); // Initially hidden
-        transition: transform 0.3s ease;
-        width: 100%;
-      }
-
-      &:hover {
-        color: #f0f0f0;
-
+    .nav-list {
+      display: flex;
+  
+      li {
+        a {
+          font-size: clamp(0.5rem, 0.6rem + 0.5vw, 1rem);
+        }
+        color: #989898;
+        position: relative;
+        transition: color 0.3s ease;
+  
+        &:not(:last-child) {
+          margin-right: 25px;
+        }
+  
         &::after {
-          transform: scaleX(1); // Expands the underline to full width on hover
+          animation: rgb-underline .5s linear infinite;
+          background-size: 200% 200%; // Ensure smooth gradient
+          background: linear-gradient(90deg, #c6ffdd, #fbd786, #f7797d);
+          bottom: -5px;
+          content: "";
+          height: 2px;
+          left: 0;
+          position: absolute;
+          transform-origin: bottom left;
+          transform: scaleX(0); // Initially hidden
+          transition: transform 0.5s ease;
+          width: 100%;
+        }
+  
+        &:hover {
+          color: #f0f0f0;
+  
+          &::after {
+            transform: scaleX(1); // Expands the underline to full width on hover
+          }
         }
       }
     }
   }
+  
 
   // Handles the animation for the header
   &::after,
@@ -105,7 +129,7 @@
     &::before {
       animation: spin 2s linear infinite;
       opacity: 0.5;
-      transition: opacity 1s ease;
+      transition: opacity 1.5s ease;
     }
 
     &::before {
@@ -131,5 +155,16 @@
   }
   to {
     --angle: 360deg;
+  }
+}
+
+@media (min-width: 815px) {
+  .header-container {
+    .menu {
+      display: none;
+    }
+    nav {
+      display: block;
+    }
   }
 }
