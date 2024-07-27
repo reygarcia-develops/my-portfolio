@@ -36,6 +36,7 @@ export class HeaderComponent {
   ];
 
   public emitSectionToNavigateTo(sectionId: string): void {
+    this.isOverlayVisible = false;
     this.sectionChanged.emit(sectionId);
   }
 }
