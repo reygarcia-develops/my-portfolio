@@ -4,9 +4,18 @@
   inherits: false;
 }
 
+$header-bg-color: #1e1e1e;
+$gradient-start: #c6ffdd;
+$gradient-middle: #fbd786;
+$gradient-end: #f7797d;
+$text-color: #989898;
+$hover-text-color: #f0f0f0;
+$overlay-bg: #00000099;
+
+// Header Container Styles
 .header-container {
   align-items: center;
-  background-color: #1e1e1e;
+  background-color: $header-bg-color;
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
@@ -20,7 +29,7 @@
     display: flex;
 
     .name {
-      font-size: clamp(.8rem, 1rem + 1vw, 1.8rem);
+      font-size: clamp(0.8rem, 1rem + 1vw, 1.8rem);
       font-family: "Cormorant Garamond", serif;
       font-weight: 700;
       padding-right: 15px;
@@ -31,8 +40,7 @@
     }
 
     .subtitle {
-      display: block;
-      color: #989898;
+      color: $text-color;
       font-size: clamp(0.5em, 0.6rem + 0.5vw, 0.8rem);
     }
   }
@@ -40,15 +48,39 @@
   .menu {
     cursor: pointer;
     display: flex;
-    flex-direction: column;;
+    flex-direction: column;
 
     span {
-      background: linear-gradient(90deg, #c6ffdd, #fbd786, #f7797d);;
+      background: linear-gradient(
+        90deg,
+        $gradient-start,
+        $gradient-middle,
+        $gradient-end
+      );
       border-radius: 2px;
       display: block;
       height: 2px;
       margin: 3px 0;
       width: 25px;
+      transition: all 0.5s ease;
+    }
+
+    &.open {
+      span {
+        &:first-of-type {
+          transform: rotate(45deg);
+          position:relative;
+          top: 8px;
+        }
+        &:nth-of-type(2) {
+          opacity: 0;
+        }
+        &:last-of-type() {
+          transform: rotate(-45deg);
+          position:relative;
+          top: -8px;
+        }
+      }
     }
   }
 
@@ -57,58 +89,63 @@
 
     .nav-list {
       display: flex;
-  
+
       li {
+        color: $text-color;
+        position: relative;
+        transition: color 0.3s ease;
+
         a {
           font-size: clamp(0.5rem, 0.6rem + 0.5vw, 1rem);
         }
-        color: #989898;
-        position: relative;
-        transition: color 0.3s ease;
-  
+
+
         &:not(:last-child) {
           margin-right: 25px;
         }
-  
+
         &::after {
-          animation: rgb-underline .5s linear infinite;
-          background-size: 200% 200%; // Ensure smooth gradient
-          background: linear-gradient(90deg, #c6ffdd, #fbd786, #f7797d);
+          animation: rgb-underline 0.5s linear infinite;
+          background: linear-gradient(
+            90deg,
+            $gradient-start,
+            $gradient-middle,
+            $gradient-end
+          );
+
+          background-size: 200% 200%;
           bottom: -5px;
           content: "";
           height: 2px;
           left: 0;
           position: absolute;
           transform-origin: bottom left;
-          transform: scaleX(0); // Initially hidden
+          transform: scaleX(0);
           transition: transform 0.5s ease;
           width: 100%;
         }
-  
+
         &:hover {
-          color: #f0f0f0;
-  
+          color: $hover-text-color;
+
           &::after {
-            transform: scaleX(1); // Expands the underline to full width on hover
+            transform: scaleX(1);
           }
         }
       }
     }
   }
-  
 
-  // Handles the animation for the header
   &::after,
   &::before {
     background-image: conic-gradient(
       from var(--angle),
-      #c6ffdd,
-      #fbd786,
-      #f7797d,
-      #fbd786,
-      #c6ffdd
+      $gradient-start,
+      $gradient-middle,
+      $gradient-end,
+      $gradient-middle,
+      $gradient-start
     );
-
     border-radius: 20px;
     box-sizing: border-box;
     content: "";
@@ -119,7 +156,7 @@
     pointer-events: none;
     position: absolute;
     top: 0;
-    transition: opacity 0.3s ease; /* Smooth transition */
+    transition: opacity 0.3s ease;
     width: 100%;
     z-index: -1;
   }
@@ -138,17 +175,118 @@
   }
 }
 
-// Keyframes for infinite RGB underline animation
+// Menu Overlay Styles
+.menu-overlay {
+  align-items: center;
+  background: $overlay-bg;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  z-index: 1000;
+
+  li {
+    color: $text-color;
+    position: relative;
+    text-align: center;
+    transition: color 3s ease;
+
+    a {
+      font-size: clamp(1rem, 1em + 1vw, 1.8rem);
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 80px;
+    }
+
+    &::after {
+      animation: rgb-underline .3s linear;
+      background: linear-gradient(
+        90deg,
+        $gradient-start,
+        $gradient-middle,
+        $gradient-end,
+        $gradient-middle,
+        $gradient-start,
+      );
+
+      background-size: 200% 200%;
+      bottom: -5px;
+      content: "";
+      height: 2px;
+      left: 0;
+      position: absolute;
+      transform-origin: bottom left;
+      transform: scaleX(0);
+      transition: transform 2s ease;
+      width: 100%;
+    }
+  }
+
+  .close-menu {
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    
+    span {
+      background: linear-gradient(
+        90deg,
+        $gradient-start,
+        $gradient-middle,
+        $gradient-end
+      );
+      border-radius: 2px;
+      display: block;
+      height: 3px;
+      margin: 3px 0;
+      width: 35px;
+
+      &:first-of-type {
+        transform: rotate(50deg);
+        position: relative;
+        top: 8px;
+      }
+      &:last-of-type {
+        transform: rotate(-48deg);
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+}
+
+.menu-overlay.show {
+  transform: translateY(0%);
+
+  li {
+    color: $hover-text-color;
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+// Keyframes
 @keyframes rgb-underline {
   0% {
     background-position: 0% 0%;
   }
   100% {
-    background-position: 100% 0%; // Smooth horizontal gradient transition
+    background-position: 100% 0%;
   }
 }
 
-// Keyframes for spinning effect
+
+
+
 @keyframes spin {
   from {
     --angle: 0deg;
@@ -158,12 +296,7 @@
   }
 }
 
-// smaller devices
-@media (max-width: 480px) {
-
-}
-
-// Stop showing the menu and show the nav list.
+// Media Queries
 @media (min-width: 768px) {
   .header-container {
     .menu {
@@ -175,7 +308,6 @@
     }
   }
 }
-
 
 @media (max-width: 830px) {
   .header-container {
@@ -194,23 +326,6 @@
 
     &::before {
       filter: blur(1.5rem);
-    }
-  }
-}
-
-@media (min-width: 1008px) {
-  .header-container {
-    &:hover {
-      &::after,
-      &::before {
-        animation: spin 2s linear infinite;
-        opacity: 0.5;
-        transition: opacity 1.5s ease;
-      }
-  
-      &::before {
-        filter: blur(1.5rem);
-      }
     }
   }
 }

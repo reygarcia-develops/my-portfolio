@@ -4,12 +4,11 @@
     <span class="subtitle">{{headerContent.subtitle}}</span>
   </div>
 
-  <div class="menu">
+  <div class="menu" (click)="isOverlayVisible = !isOverlayVisible">
     <span></span>
     <span></span>
     <span></span>
   </div>
-
   <nav>
     <ul class="nav-list">
       @for (item of navList; track item) {
@@ -20,3 +19,19 @@
     </ul>
   </nav>
 </header>
+
+<div class="menu-overlay" [ngClass]="{'show': isOverlayVisible}">
+  <div class="close-menu" (click)="isOverlayVisible = !isOverlayVisible">
+    <span></span>
+    <span></span>
+  </div>
+  <nav>
+    <ul>
+      @for (item of navList; track item) {
+        <li>
+          <a (click)="emitSectionToNavigateTo(item.id)">{{ item.label }}</a>
+        </li>
+      }
+    </ul>
+  </nav>
+</div>
