@@ -25,7 +25,7 @@ export class HeaderComponent {
 
   public headerContent: HeaderTitle = {
     title: 'Rey Garcia',
-    subtitle: 'Code whisperer',
+    subtitle: 'Pixel wizard',
   };
 
   public navList: NavItems[] = [

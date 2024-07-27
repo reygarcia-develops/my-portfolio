@@ -3,9 +3,11 @@
   flex-direction: column;
 
   section {
+    border-radius: 20px;
     display: flex;
     min-height: 300px;
     flex-direction: column;
+    padding: 30px;
 
     .title {
       font-size: clamp(.8rem, 1rem + 1vw, 1.8rem);
