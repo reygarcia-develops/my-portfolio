@@ -75,7 +75,7 @@ $overlay-bg: #00000099;
         &:nth-of-type(2) {
           opacity: 0;
         }
-        &:last-of-type() {
+        &:last-of-type {
           transform: rotate(-45deg);
           position:relative;
           top: -8px;
