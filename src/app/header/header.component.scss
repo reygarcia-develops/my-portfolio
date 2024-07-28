@@ -1,16 +1,10 @@
+@import "../../variables.scss";
+
 @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
 }
-
-$header-bg-color: #1e1e1e;
-$gradient-start: #c6ffdd;
-$gradient-middle: #fbd786;
-$gradient-end: #f7797d;
-$text-color: #989898;
-$hover-text-color: #f0f0f0;
-$overlay-bg: #00000099;
 
 // Header Container Styles
 .header-container {
@@ -37,11 +31,6 @@ $overlay-bg: #00000099;
       &:hover {
         cursor: pointer;
       }
-    }
-
-    .subtitle {
-      color: $text-color;
-      font-size: clamp(0.5em, 0.6rem + 0.5vw, 0.8rem);
     }
   }
 
@@ -95,9 +84,9 @@ $overlay-bg: #00000099;
         position: relative;
         transition: color 0.3s ease;
 
-        a {
-          font-size: clamp(0.5rem, 0.6rem + 0.5vw, 1rem);
-        }
+        // a {
+        //   font-size: clamp(0.5rem, 0.6rem + 0.5vw, 1rem);
+        // }
 
 
         &:not(:last-child) {
@@ -105,7 +94,7 @@ $overlay-bg: #00000099;
         }
 
         &::after {
-          animation: rgb-underline 0.5s linear infinite;
+          animation: megatron-header-underline 0.5s linear infinite;
           background: linear-gradient(
             90deg,
             $gradient-start,
@@ -113,7 +102,8 @@ $overlay-bg: #00000099;
             $gradient-end
           );
 
-          background-size: 200% 200%;
+          background-size: 100% 100%;
+          border-radius: 2px;
           bottom: -5px;
           content: "";
           height: 2px;
@@ -207,17 +197,16 @@ $overlay-bg: #00000099;
     }
 
     &::after {
-      animation: rgb-underline .3s linear;
+      animation: megatron-header-underline .3s linear;
       background: linear-gradient(
         90deg,
         $gradient-start,
         $gradient-middle,
         $gradient-end,
-        $gradient-middle,
-        $gradient-start,
       );
 
-      background-size: 200% 200%;
+      background-size: 100% 100%;
+      border-radius: 2px;
       bottom: -5px;
       content: "";
       height: 2px;
@@ -276,7 +265,7 @@ $overlay-bg: #00000099;
 }
 
 // KEY FRAMES
-@keyframes rgb-underline {
+@keyframes megatron-header-underline {
   0% {
     background-position: 0% 0%;
   }

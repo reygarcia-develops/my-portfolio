@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 .main {
   display: flex;
   flex-direction: column;
@@ -9,39 +11,117 @@
     flex-direction: column;
     padding: 30px;
 
-    .title {
-      font-size: clamp(.8rem, 1rem + 1vw, 1.8rem);
-      font-family: "Cormorant Garamond", serif;
-      font-weight: 700;
-      text-align: center;
+    .title-and-divider {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      flex-direction: flex-start;
       margin-bottom: 50px;
+      gap: 15px;
+
+      .title {
+        font-size: clamp(0.8rem, 1rem + 1vw, 1.8rem);
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .divider {
+        position: relative;
+        height: 1px;
+        width: 100%;
+        &:after {
+          animation: title-divider 2s ease forwards 1s;
+          background: linear-gradient(90deg, #c6ffdd, #fbd786, #f7797d);
+          background-size: 100% 100%;
+          border-radius: 2px;
+          content: "";
+          height: 2px;
+          position: absolute;
+          transform-origin: bottom left;
+          transform: scaleX(0);
+          width: 100%;
+        }
+      }
     }
+
+
 
     .section-content {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
 
       .image-content {
         display: flex;
         flex-direction: column;
         align-items: center;
         .avatar {
-          width: 150px;
+          max-width: 200px; // Ensures the image scales down to fit the container
+          width: 100%;
+          height: auto;
+          min-width: 120px;
           aspect-ratio: 1;
           object-fit: cover;
           border-radius: 100vw;
-          border: 5px solid white;
-          box-shadow: .25rem .25rem .5rem;
+          border: 5px solid #FBD786;
+          box-shadow: 0rem 0rem 1rem;
           margin-bottom: 20px;
         }
       }
       .summary {
         margin-top: 20px;
+        color: $text-color
       }
-
     }
+  }
+}
+
+@media (min-width: 831px) {
+  .main {
+    section {
+      padding: 30px 50px;
+    }
+  }
+}
+
+@media (min-width: 1008px) {
+  .main {
+    section {
+      .section-content {
+        align-items: flex-start;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .summary {
+          margin-top: 0;
+          p {
+            &:first-of-type {
+              margin-top: 0;
+            }
+          }
+        }
+
+        > * {
+          flex: 1; //Ensures equal widths for all children
+        }
+      }
+    }
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes title-divider{
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
   }
 }
