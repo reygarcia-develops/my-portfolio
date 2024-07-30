@@ -1,0 +1,18 @@
+<div class="section-content portfolio-section">
+  <div class="card-container">
+    @for(project of projects; track project) {
+      <div class="card" (click)="flipCard(project)">
+        <div class="card-inner" [class.card-flip]="project.flipped">
+          <div class="card-front">
+            {{project.title}}
+          </div>
+          <div class="card-back">
+            <p>
+              {{project.description}}
+            </p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

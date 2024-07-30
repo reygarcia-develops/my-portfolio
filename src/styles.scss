@@ -34,3 +34,22 @@ ol, ul {
   color: $text-color;
   font-size: clamp(0.5em, 0.6rem + 0.5vw, 0.8rem);
 }
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media (min-width: 1008px) {
+  .section-content {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+
+    > * {
+      flex: 1; //Ensures equal widths for all children
+    }
+  }
+}

@@ -1,0 +1,124 @@
+@import "../../variables.scss";
+
+.portfolio-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  height: 100%;
+  background: 
+    radial-gradient(
+      50px circle at 5% 30%,
+      $gradient-start 50%, 
+      transparent 50%
+    ),
+    radial-gradient(
+      50px circle at 14% 70%,
+      $gradient-middle 50%, 
+      transparent 50%
+    ),
+    radial-gradient(
+      75px circle at 30% 90%, 
+      $gradient-end 50%, 
+      transparent 50%
+    ),
+    radial-gradient(
+      100px circle at 40% 20%, 
+      $gradient-middle 50%, 
+      transparent 50%
+    ),
+    radial-gradient(
+      25px circle at 53% 80%, 
+      $gradient-start 50%, 
+      transparent 50%
+    ),
+    radial-gradient(
+      200px circle at 70% 50%, 
+      $gradient-middle 50%, 
+      transparent 50%
+    ),
+    radial-gradient(
+      100px circle at 90% 0%, 
+      $gradient-end 50%, 
+      transparent 50%
+    ),
+    radial-gradient(
+      150px circle at 100% 100%, 
+      $gradient-start 50%, 
+      transparent 50%
+    );  
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .card {
+    position: relative;
+    min-width: 256px;
+    max-width: 300px;
+    width: 100%;
+    aspect-ratio: 1;
+    perspective: 1000px;
+    cursor: pointer;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+      }
+
+      .card-front {
+        background: rgba($header-bg-color, 0.8);
+      }
+
+      .card-back {
+        background: rgba($header-bg-color, 0.8); 
+        transform: rotateY(180deg);
+      }
+    }
+  }
+}
+
+.card-flip {
+  transform: rotateY(180deg);
+}
+
+@media(min-width: 1008px) {
+  .card-container {
+    .card {
+      min-width: 400px;
+    }
+  }
+}
+
+@media (min-width: 1392px) {
+  .card-container {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1809px) {
+  .card-container {
+    justify-content: center;;
+  }  
+}
+

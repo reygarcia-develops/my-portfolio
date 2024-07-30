@@ -5,24 +5,15 @@
       <div class="title">About me</div>
       <div class="divider"></div>
     </div>
-    <div class="section-content">
-      <div class="image-content">
-        <img class="avatar" src="assets/head-shot.png" />
-        <div>Senior Software Engineer</div>
-        <div class="subtitle">- Add icon links here -</div>
-      </div>
-      <div class="summary">
-        @for(paragraph of summary; track paragraph) {
-          <p>{{ paragraph }}</p>
-        }
-      </div>
-    </div>
+    <app-about-me></app-about-me>
   </section>
   <section id="portfolio">
     <div class="title-and-divider">
       <div class="title">Portfolio</div>
       <div class="divider"></div>
-    </div>  </section>
+    </div>
+    <app-portfolio></app-portfolio>
+  </section>
   <section id="contactMe">
     <div class="title-and-divider">
       <div class="title">Skills</div>
