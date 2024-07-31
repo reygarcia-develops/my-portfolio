@@ -43,7 +43,6 @@
         height: 1px;
         width: 100%;
         &:after {
-          animation: title-divider 2s ease forwards var(--divider-animation-delay, 0s);
           background: linear-gradient(90deg, $gradient-start, $gradient-middle, $gradient-end);
           background-size: 100% 100%;
           border-radius: 2px;

@@ -17,8 +17,8 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('contentSection') sections!: QueryList<ElementRef>
   public title = 'my-portfolio';
 
-
   ngAfterViewInit(): void {
+    window.scrollTo(0, 0);
     this.intersectionObserver();
   }
   
@@ -32,12 +32,15 @@ export class AppComponent implements AfterViewInit {
     const options = {
       root: null, //relative to document viewport
       rootMargin: '0px',
-      threshold: 0.25, // 25% of the element in view
+      threshold: 0.1 // 25% of the element in view
     }
 
     const observer = new IntersectionObserver(this.handleIntersect.bind(this), options);
-    console.log(this.sections);
-    this.sections?.forEach(section => {
+    this.sections?.forEach((section, index) => {
+      const divider = section.nativeElement.querySelector('.divider') as HTMLElement;
+      if (divider) {
+        divider.setAttribute('data-divider-id', `divider-${index}`);
+      }
       observer.observe(section.nativeElement);
     });
   }
@@ -56,8 +59,8 @@ export class AppComponent implements AfterViewInit {
       if (entry.isIntersecting) {
         const index = this.sections?.toArray().findIndex(section => section.nativeElement === entry.target);
         const titleDelay = multipleInView ? index * 1.15 : 1; // Default delay of 1s if not multiple in view
-        const dividerDelay = titleDelay + .5; // Divider animation starts after title animation
-        const componentDelay = dividerDelay + 1.5; // Component animation starts after divider animation
+        const dividerDelay = titleDelay + .8; // Divider animation starts after title animation
+        const componentDelay = dividerDelay + 1.25; // Component animation starts after divider animation
   
         if (title) {
           title.style.setProperty('--transition-delay', `${titleDelay}s`);
@@ -68,24 +71,11 @@ export class AppComponent implements AfterViewInit {
           divider.style.setProperty('--divider-animation-delay', `${dividerDelay}s`);
           
           // Ensure the divider is visible and animation is triggered
-          divider.classList.remove('reset');
           divider.classList.add('animate');
         }
         if (component) {
           component.style.setProperty('--component-delay', `${componentDelay}s`);
           component.classList.add('visible');
-        }
-      } else {
-        if (title) {
-          title.classList.remove('visible');
-        }
-        if (divider) {
-          // Reset the animation
-          divider.classList.remove('animate');
-          divider.classList.add('reset');
-        }
-        if (component) {
-          component.classList.remove('visible');
         }
       }
     });

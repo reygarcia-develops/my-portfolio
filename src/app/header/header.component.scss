@@ -9,14 +9,24 @@
 // Header Container Styles
 .header-container {
   align-items: center;
-  background-color: $header-bg-color;
-  border-radius: 20px;
+  background-color: rgb(18 18 18);
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
   min-height: 80px;
   padding: 0 50px;
-  position: relative;
+  padding-top: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000; // Ensure it stays on top
+  border: none;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &.scrolled {
+    box-shadow: 0 4px 6px rgb($header-bg-color, .5); // Change box shadow to white
+    padding-top: 0;
+  }
+
 
   .name-container {
     align-items: baseline;
@@ -110,7 +120,8 @@
           width: 100%;
         }
 
-        &:hover {
+        &:hover,
+        &:focus-visible {
           color: $hover-text-color;
 
           &::after {
@@ -118,44 +129,6 @@
           }
         }
       }
-    }
-  }
-
-  &::after,
-  &::before {
-    background-image: conic-gradient(
-      from var(--angle),
-      $gradient-start,
-      $gradient-middle,
-      $gradient-end,
-      $gradient-middle,
-      $gradient-start
-    );
-    border-radius: 20px;
-    box-sizing: border-box;
-    content: "";
-    height: 100%;
-    left: 0;
-    opacity: 0;
-    padding: 3px;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    transition: opacity 0.3s ease;
-    width: 100%;
-    z-index: -1;
-  }
-
-  &:hover {
-    &::after,
-    &::before {
-      animation: header-spin 2s linear infinite;
-      opacity: 0.5;
-      transition: opacity 1.5s ease;
-    }
-
-    &::before {
-      filter: blur(1.5rem);
     }
   }
 }
@@ -235,12 +208,12 @@
 
 
       &:first-of-type {
-        transform: rotate(50deg);
+        transform: rotate(45deg);
         position: relative;
         top: 8px;
       }
       &:last-of-type {
-        transform: rotate(-48deg);
+        transform: rotate(-45deg);
         position: relative;
         top: 1px;
       }
@@ -269,15 +242,6 @@
   }
 }
 
-@keyframes header-spin {
-  from {
-    --angle: 0deg;
-  }
-  to {
-    --angle: 360deg;
-  }
-}
-
 // END KEY FRAMES
 
 // Media Queries
@@ -296,20 +260,5 @@
 @media (max-width: 830px) {
   .header-container {
     padding: 0 30px;
-  }
-}
-
-@media (max-width: 1007px) {
-  .header-container {
-    &::after,
-    &::before {
-      animation: header-spin 2s linear infinite;
-      opacity: 0.5;
-      transition: opacity 1.5s ease;
-    }
-
-    &::before {
-      filter: blur(1.5rem);
-    }
   }
 }

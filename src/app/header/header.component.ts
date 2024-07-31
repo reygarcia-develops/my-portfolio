@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, output, signal, WritableSignal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Host, HostListener, output, signal, ViewChild, WritableSignal } from '@angular/core';
 
 interface NavItems {
   label: string;
@@ -19,8 +19,10 @@ interface HeaderTitle {
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
-  sectionChanged = output<string>();
+export class HeaderComponent implements AfterViewInit {
+  @ViewChild('headerContainer') headerContainer!: ElementRef;
+
+  public sectionChanged = output<string>();
   public isOverlayVisible = false;
 
   public headerContent: HeaderTitle = {
@@ -35,8 +37,20 @@ export class HeaderComponent {
     {label: 'Experience', id: 'experience'}
   ];
 
+  ngAfterViewInit(): void {
+    this.onWindowScroll();
+  }
+
   public emitSectionToNavigateTo(sectionId: string): void {
     this.isOverlayVisible = false;
     this.sectionChanged.emit(sectionId);
+  }
+  @HostListener('window:scroll', [])
+  private onWindowScroll(): void {
+    if (window.scrollY > 0) {
+      this.headerContainer.nativeElement.classList.add('scrolled');
+    } else {
+      this.headerContainer.nativeElement.classList.remove('scrolled');
+    }
   }
 }
