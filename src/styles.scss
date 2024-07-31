@@ -10,12 +10,12 @@ body {
   background-color: #000000ed;
   color: #f0f0f0;
   font-size: clamp(0.875rem, 0.6rem + .5vw, 1rem);
-  line-height: 1.5;;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
   font-family: "Space Mono", monospace;
   font-weight: 400;
   font-style: normal;
   margin: 30px;
-
 }
 
 ol, ul {

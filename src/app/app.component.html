@@ -1,34 +1,40 @@
 <app-header (sectionChanged)="navigateToSection($event)"></app-header>
 <main class="main">
-  <section id="aboutMe">
+  <section id="aboutMe" class="content-section" #contentSection>
     <div class="title-and-divider">
       <div class="title">About me</div>
       <div class="divider"></div>
     </div>
-    <app-about-me></app-about-me>
+    <app-about-me class="component-transition"></app-about-me>
   </section>
-  <section id="portfolio">
+  <section id="portfolio" class="content-section" #contentSection>
     <div class="title-and-divider">
       <div class="title">Portfolio</div>
       <div class="divider"></div>
     </div>
-    <app-portfolio></app-portfolio>
+    <app-portfolio class="component-transition"></app-portfolio>
   </section>
-  <section id="contactMe">
-    <div class="title-and-divider">
-      <div class="title">Skills</div>
-      <div class="divider"></div>
-    </div>
-  </section>
-  <section id="experience">
+  <section id="contactMe" class="content-section" #contentSection>
     <div class="title-and-divider">
       <div class="title">Contact me</div>
       <div class="divider"></div>
     </div>
+    <div class="component-transition">
+      Contact me
+    </div>
+  </section>
+  <section id="experience" class="content-section" #contentSection>
+    <div class="title-and-divider">
+      <div class="title">Experience</div>
+      <div class="divider"></div>
+    </div>
+    <div class="component-transition">
+      Experience
+    </div>
   </section>
 </main>
-<footer>
-  <div class="footer-content">
+<footer class="content-section" #contentSection>
+  <div class="footer-content" >
     Designed & Built by Rey Garcia
   </div>
 </footer>

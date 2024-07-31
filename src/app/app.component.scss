@@ -1,19 +1,18 @@
 @import "../variables.scss";
 
-@function random-percentage() {
-  @return random(100) + '%';
-}
-
 .main {
   display: flex;
   flex-direction: column;
-
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
   section {
     border-radius: 20px;
     display: flex;
     min-height: 300px;
     flex-direction: column;
     padding: 30px;
+
 
     .title-and-divider {
       display: flex;
@@ -23,19 +22,28 @@
       margin-bottom: 50px;
       gap: 15px;
 
+
+
       .title {
         font-size: clamp(0.8rem, 1rem + 1vw, 1.8rem);
         font-family: "Cormorant Garamond", serif;
         font-weight: 700;
         white-space: nowrap;
+        opacity: 0; 
+        transition: opacity 1s ease-out var(--transition-delay, 0s); // Transition with delay
+
+        &.visible {
+          opacity: 1;
+        }
       }
 
       .divider {
+        content: '';
         position: relative;
         height: 1px;
         width: 100%;
         &:after {
-          animation: title-divider 2s ease forwards 1s;
+          animation: title-divider 2s ease forwards var(--divider-animation-delay, 0s);
           background: linear-gradient(90deg, $gradient-start, $gradient-middle, $gradient-end);
           background-size: 100% 100%;
           border-radius: 2px;
@@ -46,10 +54,38 @@
           transform: scaleX(0);
           width: 100%;
         }
+
+        &.animate:after {
+          animation: title-divider 2s ease forwards var(--divider-animation-delay, 0s);
+        }
+
+        &.reset:after {
+          animation: none;
+          transform: scaleX(0);
+        }
+      }
+    }
+
+    .component-transition {
+      opacity: 0;
+      transition: opacity 2s ease-out var(--component-delay, 0s); // Use the custom property
+
+      &.visible {
+        opacity: 1;
       }
     }
   }
 }
+
+
+// .content-section {
+//   opacity: 0;
+//   transition: opacity 1s ease-out var(--transition-delay, 0s); /* Use the custom property */
+// }
+
+// .content-section.visible {
+//   opacity: 1;
+// }
 
 @media (min-width: 831px) {
   .main {
