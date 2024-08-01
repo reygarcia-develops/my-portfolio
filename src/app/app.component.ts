@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { filter, fromEvent } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
 
 import { AboutMeComponent } from './about-me/about-me.component';
 import { HeaderComponent } from './header/header.component';
@@ -15,47 +14,34 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-@UntilDestroy()
 export class AppComponent implements AfterViewInit {
   @ViewChildren('contentSection') sections!: QueryList<ElementRef>
   public title = 'my-portfolio';
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   ngAfterViewInit(): void {
     if (window.scrollY !== 0) {
-      this.disableSmoothScroll();
-      window.scrollTo({ top: 0, behavior: 'auto' });
-
+      // Delay the execution to allow scroll to complete
       setTimeout(() => {
-        this.enableSmoothScroll();
-
-        if (window.scrollY === 0) {
+        // Ensure the DOM is updated before running IntersectionObserver
+        requestAnimationFrame(() => {
           this.intersectionObserver();
-        } else {
-          fromEvent(window, 'scroll')
-            .pipe(
-              untilDestroyed(this),
-              filter(() => window.scrollY === 0)
-            )
-            .subscribe(() => {
-              this.intersectionObserver();
-            });
-        }
-      }, 0);
+        });
+      }, 700);
     } else {
       this.intersectionObserver();
     }
   }
-
-  private onScrollToTop() {
-    if (window.scrollY === 0) {
-      window.removeEventListener('scroll', this.onScrollToTop.bind(this));
-      this.intersectionObserver();
-    }
-  }
   
-
   public navigateToSection(sectionId: string) {
     const section = document.getElementById(sectionId);
     section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -111,13 +97,5 @@ export class AppComponent implements AfterViewInit {
         }
       }
     });
-  }
-
-  private disableSmoothScroll() {
-    this.renderer.setStyle(document.body, 'scroll-behavior', 'auto');
-  }
-
-  private enableSmoothScroll() {
-    this.renderer.setStyle(document.body, 'scroll-behavior', 'smooth');
   }
 }
