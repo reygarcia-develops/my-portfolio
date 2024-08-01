@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { filter, fromEvent } from 'rxjs';
-
 
 import { AboutMeComponent } from './about-me/about-me.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,21 +13,24 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-@UntilDestroy()
 export class AppComponent implements AfterViewInit {
   @ViewChildren('contentSection') sections!: QueryList<ElementRef>
   public title = 'my-portfolio';
 
   ngAfterViewInit(): void {
-    window.scrollTo(0, 0);
-    fromEvent(window, 'scroll')
-      .pipe(
-        untilDestroyed(this),
-        filter(() => window.scrollY === 0)
-      )
-      .subscribe(() => {
-        this.intersectionObserver();
-      });
+    if (window.scrollY !== 0) {
+      window.scrollTo(0, 0);
+      window.addEventListener('scroll', this.onScrollToTop.bind(this));
+    } else {
+      this.intersectionObserver();
+    }
+  }
+
+  private onScrollToTop() {
+    if (window.scrollY === 0) {
+      window.removeEventListener('scroll', this.onScrollToTop.bind(this));
+      this.intersectionObserver();
+    }
   }
   
 
