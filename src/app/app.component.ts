@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { filter, fromEvent } from 'rxjs';
 
+
+import { AboutMeComponent } from './about-me/about-me.component';
 import { HeaderComponent } from './header/header.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
-import { AboutMeComponent } from './about-me/about-me.component';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +16,7 @@ import { AboutMeComponent } from './about-me/about-me.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
+@UntilDestroy()
 export class AppComponent implements AfterViewInit {
   @ViewChildren('contentSection') sections!: QueryList<ElementRef>
   public title = 'my-portfolio';
@@ -20,15 +24,15 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     if (window.scrollY !== 0) {
       window.scrollTo(0, 0);
-      window.addEventListener('scroll', this.onScrollToTop.bind(this));
+      fromEvent(window, 'scroll')
+        .pipe(
+          untilDestroyed(this),
+          filter(() => window.scrollY === 0)
+        )
+        .subscribe(() => {
+          this.intersectionObserver();
+        });
     } else {
-      this.intersectionObserver();
-    }
-  }
-
-  private onScrollToTop() {
-    if (window.scrollY === 0) {
-      window.removeEventListener('scroll', this.onScrollToTop.bind(this));
       this.intersectionObserver();
     }
   }
@@ -40,10 +44,13 @@ export class AppComponent implements AfterViewInit {
   }
 
   private intersectionObserver() {
+    let threshold = .1;
+    if (window.innerWidth >= 875) {
+      threshold = .25;
+    }
     const options = {
       root: null, //relative to document viewport
-      rootMargin: '0px',
-      threshold: 0.25 // 25% of the element in view
+      threshold: threshold,
     }
 
     const observer = new IntersectionObserver(this.handleIntersect.bind(this), options);
@@ -57,13 +64,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   private handleIntersect(entries: IntersectionObserverEntry[], observer: IntersectionObserver) {
-    const sortedEntries = entries.sort((a, b) => {
-      const indexA = this.sections?.toArray().findIndex(section => section.nativeElement === a.target) ?? 0;
-      const indexB = this.sections?.toArray().findIndex(section => section.nativeElement === b.target) ?? 0;
-      return indexA - indexB;
-    });
-
-    sortedEntries.forEach(entry => {
+    entries.forEach(entry => {
       const element = entry.target as HTMLElement;
       const title = element.querySelector('.title') as HTMLElement;
       const divider = element.querySelector('.divider') as HTMLElement;
@@ -82,7 +83,7 @@ export class AppComponent implements AfterViewInit {
   
         if (divider) {
           divider.style.setProperty('--divider-animation-delay', `${dividerDelay}s`);
-          
+
           // Ensure the divider is visible and animation is triggered
           divider.classList.add('animate');
         }

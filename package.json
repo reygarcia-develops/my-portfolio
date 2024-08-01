@@ -20,7 +20,10 @@
     "@angular/platform-browser": "^18.1.0",
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
+    "@ngneat/until-destroy": "^10.0.0",
+    "i": "^0.3.7",
     "normalize.css": "^8.0.1",
+    "npm": "^10.8.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
