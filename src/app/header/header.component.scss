@@ -40,7 +40,7 @@
       font-family: "Cormorant Garamond", serif;
       font-weight: 700;
       padding-right: 15px;
-      animation: nav-drop-in .5s forwards;
+      animation: drop-in .5s forwards;
       opacity: 0;
 
       &:hover {
@@ -50,7 +50,7 @@
     }
     .subtitle {
       opacity: 0;;
-      animation: .5s nav-drop-in .5s forwards;
+      animation: .5s drop-in .5s forwards;
     }
   }
 
@@ -68,7 +68,7 @@
       width: 25px;
       opacity: 0;
 
-      animation: nav-drop-in 0.5s forwards;
+      animation: drop-in 0.5s forwards;
       animation-delay: calc(var(--i) * 0.2s);
 
       &:first-of-type {
@@ -123,12 +123,7 @@
 
         &::after {
           animation: megatron-header-underline 0.5s linear infinite;
-          background: linear-gradient(
-            90deg,
-            $gradient-start,
-            $gradient-middle,
-            $gradient-end
-          );
+          @include linear-gradient-background();
 
           background-size: 100% 100%;
           border-radius: 2px;
@@ -173,11 +168,40 @@
   width: 100%;
   z-index: 1000;
 
+  &.show {
+    transform: translateY(0%);
+
+    li {
+      color: $hover-text-color;
+  
+      opacity: 0;
+      animation: drop-in 0.5s forwards;
+      animation-delay: calc(var(--i) * 0.2s);
+  
+      &:nth-child(1) {
+        --i: 5;
+      }
+      &:nth-child(2) {
+        --i: 6;
+      }
+      &:nth-child(3) {
+        --i: 7;
+      }
+      &:nth-child(4) {
+        --i: 8;
+      }
+      
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+
   li {
     color: $text-color;
     position: relative;
     text-align: center;
-    transition: color 3s ease;
+    transition: color 3s ease 1s;
 
     a {
       font-size: clamp(1rem, 1em + 1vw, 1.8rem);
@@ -188,14 +212,8 @@
     }
 
     &::after {
-      animation: megatron-header-underline 0.3s linear;
-      background: linear-gradient(
-        90deg,
-        $gradient-start,
-        $gradient-middle,
-        $gradient-end
-      );
-
+      animation: megatron-header-underline 0.3s linear 2s forwards;
+      @include linear-gradient-background();
       background-size: 100% 100%;
       border-radius: 2px;
       bottom: -5px;
@@ -205,7 +223,7 @@
       position: absolute;
       transform-origin: bottom left;
       transform: scaleX(0);
-      transition: transform 2s ease;
+      transition: transform 0.5s ease 2s;
       width: 100%;
     }
   }
@@ -217,12 +235,7 @@
     right: 30px;
 
     span {
-      background: linear-gradient(
-        90deg,
-        $gradient-start,
-        $gradient-middle,
-        $gradient-end
-      );
+      @include linear-gradient-background();
       border-radius: 2px;
       display: block;
       height: 3px;
@@ -243,17 +256,6 @@
   }
 }
 
-.menu-overlay.show {
-  transform: translateY(0%);
-
-  li {
-    color: $hover-text-color;
-    &::after {
-      transform: scaleX(1);
-    }
-  }
-}
-
 // Media Queries
 @media (min-width: 768px) {
   .header-container {
@@ -266,7 +268,7 @@
 
       li {
         opacity: 0;
-        animation: nav-drop-in 0.5s forwards;
+        animation: drop-in 0.5s forwards;
         animation-delay: calc(var(--i) * 0.2s);
 
         &:nth-child(1) {
@@ -302,14 +304,5 @@
   }
 }
 
-@keyframes nav-drop-in {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+
 // END KEY FRAMES

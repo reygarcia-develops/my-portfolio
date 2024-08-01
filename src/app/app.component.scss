@@ -1,18 +1,18 @@
 @import "../variables.scss";
+@import "../mixins.scss";
 
 .main {
   display: flex;
   flex-direction: column;
-  max-width: 1600px;
-  width: 100%;
+  max-width: 1231px;
   margin: 0 auto;
+  padding: 0 25px;
   section {
     border-radius: 20px;
     display: flex;
     min-height: 300px;
     flex-direction: column;
-    padding: 30px;
-
+    padding: 80px 0;
 
     .title-and-divider {
       display: flex;
@@ -30,10 +30,12 @@
         font-weight: 700;
         white-space: nowrap;
         opacity: 0; 
-        transition: opacity 1s ease-out var(--transition-delay, 0s); // Transition with delay
-
-        &.visible {
-          opacity: 1;
+        &.animate {
+          animation: drop-in 0.5s forwards var(--title-delay, 0s);
+        }
+        &.reset {
+          animation: none;
+          opacity: 0;
         }
       }
 
@@ -76,11 +78,24 @@
   }
 }
 
-@media (min-width: 831px) {
+@media (min-width: 480px) {
   .main {
+    padding: 0 50px;
+  }
+}
+
+@media (min-width: 800px) {
+  .main {
+    padding: 0 100px;
     section {
-      padding: 30px 50px;
+      padding: 100px 0;
     }
+  }
+}
+
+@media (min-width: 1080px) {
+  .main {
+    padding: 0 150px;
   }
 }
 

@@ -46,7 +46,7 @@ ol, ul {
   align-items: center;
 }
 
-@media (min-width: 1008px) {
+@media (min-width: 1080px) {
   .section-content {
     align-items: flex-start;
     flex-direction: row;
@@ -55,5 +55,16 @@ ol, ul {
     > * {
       flex: 1; //Ensures equal widths for all children
     }
+  }
+}
+
+@keyframes drop-in {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
