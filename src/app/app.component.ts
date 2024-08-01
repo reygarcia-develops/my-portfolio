@@ -58,9 +58,11 @@ export class AppComponent implements AfterViewInit {
   
       if (entry.isIntersecting) {
         const index = this.sections?.toArray().findIndex(section => section.nativeElement === entry.target);
-        const titleDelay = multipleInView ? index * 1.15 : 1; // Default delay of 1s if not multiple in view
-        const dividerDelay = titleDelay + .8; // Divider animation starts after title animation
-        const componentDelay = dividerDelay + 1.25; // Component animation starts after divider animation
+        const baseDelay = 2; // Base delay value
+        const incrementalDelay = 1.15; // Incremental delay value
+        const titleDelay = multipleInView ? baseDelay + (index * incrementalDelay) : 1 ; 
+        const dividerDelay = titleDelay + .8;
+        const componentDelay = dividerDelay + .8; 
   
         if (title) {
           title.style.setProperty('--transition-delay', `${titleDelay}s`);

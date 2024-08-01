@@ -1,4 +1,8 @@
 @import "../../variables.scss";
+@import "../../mixins.scss";
+
+// Define the mixin for the linear gradient background with default values
+
 
 @property --angle {
   syntax: "<angle>";
@@ -14,8 +18,8 @@
   justify-content: space-between;
   margin-bottom: 50px;
   min-height: 80px;
-  padding: 0 50px;
-  padding-top: 10px;
+  padding-inline: 50px;
+  padding-top: 15px;
   position: sticky;
   top: 0;
   z-index: 1000; // Ensure it stays on top
@@ -23,10 +27,9 @@
   transition: box-shadow 0.3s ease-in-out;
 
   &.scrolled {
-    box-shadow: 0 4px 6px rgb($header-bg-color, .5); // Change box shadow to white
+    box-shadow: 0 4px 6px rgb($header-bg-color, 0.5); // Change box shadow to white
     padding-top: 0;
   }
-
 
   .name-container {
     align-items: baseline;
@@ -37,10 +40,17 @@
       font-family: "Cormorant Garamond", serif;
       font-weight: 700;
       padding-right: 15px;
+      animation: nav-drop-in .5s forwards;
+      opacity: 0;
 
       &:hover {
         cursor: pointer;
       }
+      
+    }
+    .subtitle {
+      opacity: 0;;
+      animation: .5s nav-drop-in .5s forwards;
     }
   }
 
@@ -50,25 +60,38 @@
     flex-direction: column;
 
     span {
-      background: linear-gradient(
-        90deg,
-        $gradient-start,
-        $gradient-middle,
-        $gradient-end
-      );
+      background: transparent;
       border-radius: 2px;
       display: block;
       height: 2px;
       margin: 3px 0;
       width: 25px;
-      transition: all 0.5s ease;
+      opacity: 0;
+
+      animation: nav-drop-in 0.5s forwards;
+      animation-delay: calc(var(--i) * 0.2s);
+
+      &:first-of-type {
+        --i: 5;
+        @include linear-gradient-background();
+      }
+      &:nth-of-type(2) {
+        --i: 6;
+        @include linear-gradient-background();
+      }
+      &:last-of-type {
+        --i: 7;
+        @include linear-gradient-background();
+
+      }
     }
 
     &.open {
+      transition: all 0.5s ease;
       span {
         &:first-of-type {
           transform: rotate(45deg);
-          position:relative;
+          position: relative;
           top: 8px;
         }
         &:nth-of-type(2) {
@@ -76,7 +99,7 @@
         }
         &:last-of-type {
           transform: rotate(-45deg);
-          position:relative;
+          position: relative;
           top: -8px;
         }
       }
@@ -165,12 +188,12 @@
     }
 
     &::after {
-      animation: megatron-header-underline .3s linear;
+      animation: megatron-header-underline 0.3s linear;
       background: linear-gradient(
         90deg,
         $gradient-start,
         $gradient-middle,
-        $gradient-end,
+        $gradient-end
       );
 
       background-size: 100% 100%;
@@ -206,7 +229,6 @@
       margin: 3px 0;
       width: 35px;
 
-
       &:first-of-type {
         transform: rotate(45deg);
         position: relative;
@@ -232,6 +254,44 @@
   }
 }
 
+// Media Queries
+@media (min-width: 768px) {
+  .header-container {
+    .menu {
+      display: none;
+    }
+
+    nav {
+      display: block;
+
+      li {
+        opacity: 0;
+        animation: nav-drop-in 0.5s forwards;
+        animation-delay: calc(var(--i) * 0.2s);
+
+        &:nth-child(1) {
+          --i: 5;
+        }
+        &:nth-child(2) {
+          --i: 6;
+        }
+        &:nth-child(3) {
+          --i: 7;
+        }
+        &:nth-child(4) {
+          --i: 8;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 830px) {
+  .header-container {
+    padding-inline: 30px;
+  }
+}
+
 // KEY FRAMES
 @keyframes megatron-header-underline {
   0% {
@@ -242,23 +302,14 @@
   }
 }
 
+@keyframes nav-drop-in {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 // END KEY FRAMES
-
-// Media Queries
-@media (min-width: 768px) {
-  .header-container {
-    .menu {
-      display: none;
-    }
-
-    nav {
-      display: block;
-    }
-  }
-}
-
-@media (max-width: 830px) {
-  .header-container {
-    padding: 0 30px;
-  }
-}

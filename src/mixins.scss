@@ -1,0 +1,12 @@
+@mixin linear-gradient-background(
+  $start: $gradient-start, // Default gradient start color
+  $middle: $gradient-middle, // Default gradient middle color
+  $end: $gradient-end // Default gradient end color
+) {
+  background: linear-gradient(
+    90deg,
+    $start,
+    $middle,
+    $end
+  );
+}
