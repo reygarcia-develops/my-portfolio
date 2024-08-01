@@ -18,8 +18,19 @@ export class AppComponent implements AfterViewInit {
   public title = 'my-portfolio';
 
   ngAfterViewInit(): void {
-    window.scrollTo(0, 0);
-    this.intersectionObserver();
+    if (window.scrollY !== 0) {
+      window.scrollTo(0, 0);
+      window.addEventListener('scroll', this.onScrollToTop.bind(this));
+    } else {
+      this.intersectionObserver();
+    }
+  }
+
+  private onScrollToTop() {
+    if (window.scrollY === 0) {
+      window.removeEventListener('scroll', this.onScrollToTop.bind(this));
+      this.intersectionObserver();
+    }
   }
   
 
