@@ -179,16 +179,16 @@
       animation-delay: calc(var(--i) * 0.2s);
   
       &:nth-child(1) {
-        --i: 5;
+        --i: 4;
       }
       &:nth-child(2) {
-        --i: 6;
+        --i: 5;
       }
       &:nth-child(3) {
-        --i: 7;
+        --i: 6;
       }
       &:nth-child(4) {
-        --i: 8;
+        --i: 7;
       }
       
       &::after {
@@ -212,7 +212,7 @@
     }
 
     &::after {
-      animation: megatron-header-underline 0.3s linear 2s forwards;
+      animation: megatron-header-underline 0.3s linear forwards;
       @include linear-gradient-background();
       background-size: 100% 100%;
       border-radius: 2px;
@@ -223,7 +223,7 @@
       position: absolute;
       transform-origin: bottom left;
       transform: scaleX(0);
-      transition: transform 0.5s ease 2s;
+      transition: transform 0.5s ease 1.8s;
       width: 100%;
     }
   }
