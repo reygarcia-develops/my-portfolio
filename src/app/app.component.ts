@@ -46,10 +46,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   private handleIntersect(entries: IntersectionObserverEntry[], observer: IntersectionObserver) {
-    // Track the number of sections in view
-    const visibleSections = entries.filter(entry => entry.isIntersecting);
-    const multipleInView = visibleSections.length >= 2;
-
     const sortedEntries = entries.sort((a, b) => {
       const indexA = this.sections?.toArray().findIndex(section => section.nativeElement === a.target) ?? 0;
       const indexB = this.sections?.toArray().findIndex(section => section.nativeElement === b.target) ?? 0;
@@ -65,8 +61,8 @@ export class AppComponent implements AfterViewInit {
       if (entry.isIntersecting) {
         const index = this.sections?.toArray().findIndex(section => section.nativeElement === entry.target);
         const titleDelay = index === 0 ? 1.8 : .5; 
-        const dividerDelay = titleDelay + .93;
-        const componentDelay = dividerDelay + .8; 
+        const dividerDelay = titleDelay + .5;
+        const componentDelay = dividerDelay + .6; 
   
         if (title) {
           title.style.setProperty('--title-delay', `${titleDelay}s`);

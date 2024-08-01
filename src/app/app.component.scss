@@ -57,7 +57,7 @@
         }
 
         &.animate:after {
-          animation: title-divider 2s ease forwards var(--divider-animation-delay, 0s);
+          animation: title-divider .7s ease forwards var(--divider-animation-delay, 0s);
         }
 
         &.reset:after {
@@ -102,7 +102,8 @@
 footer {
   display: flex;
   justify-content: center;
-  color: #989898
+  color: #989898;
+  padding-block: 30px;
 }
 
 @keyframes title-divider{

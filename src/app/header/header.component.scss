@@ -1,9 +1,6 @@
 @import "../../variables.scss";
 @import "../../mixins.scss";
 
-// Define the mixin for the linear gradient background with default values
-
-
 @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
