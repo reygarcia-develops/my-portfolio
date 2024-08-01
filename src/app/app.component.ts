@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { filter, fromEvent } from 'rxjs';
 
 import { AboutMeComponent } from './about-me/about-me.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,14 +15,34 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
+@UntilDestroy()
 export class AppComponent implements AfterViewInit {
   @ViewChildren('contentSection') sections!: QueryList<ElementRef>
   public title = 'my-portfolio';
 
+  constructor(private renderer: Renderer2) {}
+
   ngAfterViewInit(): void {
     if (window.scrollY !== 0) {
-      window.scrollTo(0, 0);
-      window.addEventListener('scroll', this.onScrollToTop.bind(this));
+      this.disableSmoothScroll();
+      window.scrollTo({ top: 0, behavior: 'auto' });
+
+      setTimeout(() => {
+        this.enableSmoothScroll();
+
+        if (window.scrollY === 0) {
+          this.intersectionObserver();
+        } else {
+          fromEvent(window, 'scroll')
+            .pipe(
+              untilDestroyed(this),
+              filter(() => window.scrollY === 0)
+            )
+            .subscribe(() => {
+              this.intersectionObserver();
+            });
+        }
+      }, 0);
     } else {
       this.intersectionObserver();
     }
@@ -89,5 +111,13 @@ export class AppComponent implements AfterViewInit {
         }
       }
     });
+  }
+
+  private disableSmoothScroll() {
+    this.renderer.setStyle(document.body, 'scroll-behavior', 'auto');
+  }
+
+  private enableSmoothScroll() {
+    this.renderer.setStyle(document.body, 'scroll-behavior', 'smooth');
   }
 }
