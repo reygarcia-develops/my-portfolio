@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -16,6 +16,8 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 })
 export class AppComponent implements AfterViewInit {
   @ViewChildren('contentSection') sections!: QueryList<ElementRef>
+  @ViewChild(PortfolioComponent) portfolioComponent!: PortfolioComponent;
+
   public title = 'my-portfolio';
 
   constructor(private router: Router) {}
@@ -72,13 +74,11 @@ export class AppComponent implements AfterViewInit {
       const element = entry.target as HTMLElement;
       const title = element.querySelector('.title') as HTMLElement;
       const divider = element.querySelector('.divider') as HTMLElement;
-      const component = element.querySelector('.component-transition') as HTMLElement;
   
       if (entry.isIntersecting) {
         const index = this.sections?.toArray().findIndex(section => section.nativeElement === entry.target);
         const titleDelay = index === 0 ? 1.8 : .5; 
         const dividerDelay = titleDelay + .5;
-        const componentDelay = dividerDelay + .6; 
   
         if (title) {
           title.style.setProperty('--title-delay', `${titleDelay}s`);
@@ -91,9 +91,9 @@ export class AppComponent implements AfterViewInit {
           // Ensure the divider is visible and animation is triggered
           divider.classList.add('animate');
         }
-        if (component) {
-          component.style.setProperty('--component-delay', `${componentDelay}s`);
-          component.classList.add('visible');
+        
+        if (element.id === 'portfolio') {
+          this.portfolioComponent.addAnimationClassToCards();
         }
       }
     });

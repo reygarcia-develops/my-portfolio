@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Renderer2 } from '@angular/core';
 
 interface Project {
   title: string;
-  description: string;
-  flipped: boolean;
+  summary: string[];
+  active: boolean;
 }
 
 @Component({
@@ -17,28 +17,38 @@ interface Project {
 export class PortfolioComponent {
   public readonly projects: Project[] = [
     {
-      title: 'Project 1',
-      description: 'Description for Project 1',
-      flipped: false,
+      title: 'Bloomsflowers',
+      summary: ['Created a PCI complient E-Commerce website for H-E-B flowers. This was built using Java, utilizing the Spring framework, and AnguarJs. Our team was the first to introduce AngularJS to H-E-B as well as pilot the Agile methodology using Scrum.',
+      'Along the way, I learned how to create and manage integrations using Tibco BusinessWorks.',
+      ],
+      active: false,
     },
     {
       title: 'Project 2',
-      description: 'Description for Project 2',
-      flipped: false,
+      summary: ['Description for Project 2'],
+      active: false,
     },
     {
       title: 'Project 3',
-      description: 'Description for Project 3',
-      flipped: false,
+      summary: ['Description for Project 3'],
+      active: false,
     },
     {
       title: 'Project 4',
-      description: 'Description for Project 4',
-      flipped: false,
+      summary: ['Description for Project 4'],
+      active: false,
     },
   ];
+  constructor(private renderer: Renderer2) {}
 
-  public flipCard(project: Project): void {
-    project.flipped = !project.flipped;
+  public toggleActive(project: Project): void {
+    project.active = !project.active;
+  }
+
+  public addAnimationClassToCards(): void {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card) => {
+      this.renderer.addClass(card, 'animate');
+    });
   }
 }

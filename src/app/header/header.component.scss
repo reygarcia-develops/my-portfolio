@@ -79,7 +79,6 @@
       &:last-of-type {
         --i: 7;
         @include linear-gradient-background();
-
       }
     }
 
