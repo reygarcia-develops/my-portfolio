@@ -1,20 +1,20 @@
 <app-header (sectionChanged)="navigateToSection($event)"></app-header>
 <main class="main">
-  <section id="aboutMe" class="content-section" #contentSection>
+  <section id="aboutMe" #contentSection>
     <div class="title-and-divider">
       <div class="title">About me</div>
       <div class="divider"></div>
     </div>
     <app-about-me class="component-transition"></app-about-me>
   </section>
-  <section id="portfolio" class="content-section" #contentSection>
+  <section id="portfolio" #contentSection>
     <div class="title-and-divider">
       <div class="title">Portfolio</div>
       <div class="divider"></div>
     </div>
     <app-portfolio class="component-transition"></app-portfolio>
   </section>
-  <section id="contactMe" class="content-section" #contentSection>
+  <section id="contactMe" #contentSection>
     <div class="title-and-divider">
       <div class="title">Contact me</div>
       <div class="divider"></div>
@@ -23,7 +23,7 @@
       Contact me
     </div>
   </section>
-  <section id="experience" class="content-section" #contentSection>
+  <section id="experience" #contentSection>
     <div class="title-and-divider">
       <div class="title">Experience</div>
       <div class="divider"></div>
@@ -33,7 +33,7 @@
     </div>
   </section>
 </main>
-<footer class="content-section" #contentSection>
+<footer #contentSection>
   <div class="footer-content" >
     Designed & Built by Rey Garcia
   </div>

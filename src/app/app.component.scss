@@ -7,12 +7,14 @@
   max-width: 1231px;
   margin: 0 auto;
   padding: 0 25px;
+
   section {
     border-radius: 20px;
     display: flex;
     min-height: 300px;
     flex-direction: column;
     padding: 50px 0;
+    position: relative;
 
     &:first-of-type {
       padding-top: 25px;
@@ -30,14 +32,14 @@
         font-family: "Cormorant Garamond", serif;
         font-weight: 700;
         white-space: nowrap;
-        opacity: 0; 
+        opacity: 0;
         &.animate {
           animation: drop-in 0.5s forwards var(--title-delay, 0s);
         }
       }
 
       .divider {
-        content: '';
+        content: "";
         position: relative;
         height: 1px;
         width: 100%;
@@ -54,7 +56,7 @@
         }
 
         &.animate:after {
-          animation: title-divider .7s ease forwards var(--divider-animation-delay, 0s);
+          animation: title-divider 0.7s ease forwards var(--divider-animation-delay, 0s);
         }
 
         &.reset:after {
@@ -105,7 +107,7 @@ footer {
   padding-block: 30px;
 }
 
-@keyframes title-divider{
+@keyframes title-divider {
   0% {
     transform: scaleX(0);
   }

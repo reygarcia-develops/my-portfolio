@@ -44,9 +44,18 @@ export class AppComponent implements AfterViewInit {
     }
   }
   
-  public navigateToSection(sectionId: string) {
-    const section = document.getElementById(sectionId);
-    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  navigateToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 60;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   }
 
   private intersectionObserver() {
@@ -92,8 +101,20 @@ export class AppComponent implements AfterViewInit {
           divider.classList.add('animate');
         }
         
-        if (element.id === 'portfolio') {
-          this.portfolioComponent.addAnimationClassToCards();
+        switch (element.id) { 
+          case 'aboutMe': {
+            break;
+          }
+          case 'portfolio': {
+            this.portfolioComponent.addAnimateToPortfolioCards();
+            break;
+          }
+          case 'contactMe': {
+            break;
+          }
+          case 'experience': {
+            break;
+          }
         }
       }
     });

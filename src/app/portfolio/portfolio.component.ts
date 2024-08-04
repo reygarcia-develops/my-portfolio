@@ -45,7 +45,7 @@ export class PortfolioComponent {
     project.active = !project.active;
   }
 
-  public addAnimationClassToCards(): void {
+  public addAnimateToPortfolioCards(): void {
     const cards = document.querySelectorAll('.card');
     cards.forEach((card) => {
       this.renderer.addClass(card, 'animate');

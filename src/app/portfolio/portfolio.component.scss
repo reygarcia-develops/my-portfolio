@@ -1,5 +1,5 @@
 @import "../../variables.scss";
-@import '../../mixins.scss';
+@import "../../mixins.scss";
 
 .portfolio-section {
   border-radius: 30px;
@@ -7,47 +7,14 @@
   overflow: visible;
   min-height: 300px;
   height: 100%;
-  background: 
-    radial-gradient(
-      50px circle at 5% 30%,
-      $gradient-start 50%, 
-      transparent 50%
-    ),
-    radial-gradient(
-      50px circle at 14% 70%,
-      $gradient-middle 50%, 
-      transparent 50%
-    ),
-    radial-gradient(
-      75px circle at 30% 90%, 
-      $gradient-end 50%, 
-      transparent 50%
-    ),
-    radial-gradient(
-      100px circle at 40% 20%, 
-      $gradient-middle 50%, 
-      transparent 50%
-    ),
-    radial-gradient(
-      25px circle at 53% 80%, 
-      $gradient-start 50%, 
-      transparent 50%
-    ),
-    radial-gradient(
-      200px circle at 70% 50%, 
-      $gradient-middle 50%, 
-      transparent 50%
-    ),
-    radial-gradient(
-      100px circle at 90% 0%, 
-      $gradient-end 50%, 
-      transparent 50%
-    ),
-    radial-gradient(
-      150px circle at 100% 100%, 
-      $gradient-start 50%, 
-      transparent 50%
-    );  
+  background: radial-gradient(50px circle at 5% 30%, $gradient-start 50%, transparent 50%),
+    radial-gradient(50px circle at 14% 70%, $gradient-middle 50%, transparent 50%),
+    radial-gradient(75px circle at 30% 90%, $gradient-end 50%, transparent 50%),
+    radial-gradient(100px circle at 40% 20%, $gradient-middle 50%, transparent 50%),
+    radial-gradient(25px circle at 53% 80%, $gradient-start 50%, transparent 50%),
+    radial-gradient(200px circle at 70% 50%, $gradient-middle 50%, transparent 50%),
+    radial-gradient(100px circle at 90% 0%, $gradient-end 50%, transparent 50%),
+    radial-gradient(150px circle at 100% 100%, $gradient-start 50%, transparent 50%);
 }
 
 .card-container {
@@ -68,18 +35,19 @@
     backdrop-filter: blur(10px);
     border-radius: 20px;
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition:
+      transform 0.5s ease,
+      opacity 0.5s ease;
     transform: translateY(-20%); /* Initial state: off-screen to the right */
     &:nth-of-type(3),
     &:nth-of-type(4) {
-      transform: translateY(20%); 
+      transform: translateY(20%);
     }
-
 
     &.animate {
       opacity: 1;
       transform: translateY(0%); /* Transition state: on-screen */
-  
+
       &:first-of-type {
         transition-delay: 1.8s;
       }
@@ -121,7 +89,7 @@
       }
 
       .card-back {
-        background: rgba($header-bg-color, 0.8); 
+        background: rgba($header-bg-color, 0.8);
         transform: rotateY(180deg);
       }
     }
@@ -132,12 +100,10 @@
   transform: rotateY(180deg);
 }
 
-@media(min-width: 1008px) {
+@media (min-width: 1008px) {
   .card-container {
     .card {
       min-width: 400px;
     }
   }
 }
-
-
