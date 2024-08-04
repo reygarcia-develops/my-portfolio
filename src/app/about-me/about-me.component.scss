@@ -1,5 +1,8 @@
 @import "../../variables.scss";
 
+$base-transition-delay: 3s;
+$delay-increment: 0.2s;
+
 .image-content {
   display: flex;
   flex-direction: column;
@@ -9,7 +12,7 @@
   transition: 
     transform 0.5s ease,
     opacity 0.5s ease;
-  transition-delay: 3s;
+  transition-delay: $base-transition-delay;
   width: 100%;
 
   &.animate {
@@ -45,17 +48,10 @@
       opacity: 1;
       transform: translateY(0%); /* Transition state: on-screen */
 
-      &:first-of-type {
-        transition-delay: 3.2s;
-      }
-      &:nth-of-type(2) {
-        transition-delay: 3.4s;
-      }
-      &:nth-of-type(3) {
-        transition-delay: 3.6s;
-      }
-      &:nth-of-type(4) {
-        transition-delay: 3.8s;
+      @for $i from 1 through 4 {
+        &:nth-of-type(#{$i}) {
+          transition-delay: $base-transition-delay + $delay-increment * $i;
+        }
       }
     }
   }

@@ -1,6 +1,9 @@
 @import "../../variables.scss";
 @import "../../mixins.scss";
 
+$base-delay: 1.8s;
+$delay-increment: 0.2s;
+
 .portfolio-section {
   border-radius: 30px;
   position: relative;
@@ -48,17 +51,10 @@
       opacity: 1;
       transform: translateY(0%); /* Transition state: on-screen */
 
-      &:first-of-type {
-        transition-delay: 1.8s;
-      }
-      &:nth-of-type(2) {
-        transition-delay: 2s;
-      }
-      &:nth-of-type(3) {
-        transition-delay: 2.2s;
-      }
-      &:nth-of-type(4) {
-        transition-delay: 2.4s;
+      @for $i from 1 through 4 {
+        &:nth-of-type(#{$i}) {
+          transition-delay: $base-delay + $delay-increment * ($i - 1);
+        }
       }
     }
 
