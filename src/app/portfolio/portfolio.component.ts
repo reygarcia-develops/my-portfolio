@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
 
 interface Project {
   title: string;
@@ -15,6 +15,8 @@ interface Project {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioComponent {
+  @ViewChildren('card') cards!: QueryList<ElementRef>;
+
   public readonly projects: Project[] = [
     {
       title: 'Bloomsflowers',
@@ -46,9 +48,9 @@ export class PortfolioComponent {
   }
 
   public addAnimateToPortfolioCards(): void {
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card) => {
-      this.renderer.addClass(card, 'animate');
+    console.log(this.cards);
+    this.cards.forEach((card) => {
+      this.renderer.addClass(card.nativeElement, 'animate');
     });
   }
 }

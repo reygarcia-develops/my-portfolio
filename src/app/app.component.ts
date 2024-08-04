@@ -16,7 +16,8 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 })
 export class AppComponent implements AfterViewInit {
   @ViewChildren('contentSection') sections!: QueryList<ElementRef>
-  @ViewChild(PortfolioComponent) portfolioComponent!: PortfolioComponent;
+  @ViewChild(AboutMeComponent) aboutMe!: AboutMeComponent;
+  @ViewChild(PortfolioComponent) portfolio!: PortfolioComponent;
 
   public title = 'my-portfolio';
 
@@ -103,10 +104,11 @@ export class AppComponent implements AfterViewInit {
         
         switch (element.id) { 
           case 'aboutMe': {
+            this.aboutMe.addAnimateToContent();
             break;
           }
           case 'portfolio': {
-            this.portfolioComponent.addAnimateToPortfolioCards();
+            this.portfolio.addAnimateToPortfolioCards();
             break;
           }
           case 'contactMe': {

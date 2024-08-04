@@ -1,12 +1,12 @@
 <div class="section-content">
-  <div class="image-content">
-    <img class="avatar" src="assets/head-shot.png" />
+  <div class="image-content" #imageContent>
+    <img class="avatar" #avatar src="assets/head-shot.png" />
     <div>Senior Software Engineer</div>
     <div class="subtitle">- Add icon links here -</div>
   </div>
-  <div class="summary">
+  <div class="summary" #summaryDetail>
     @for(paragraph of summary; track paragraph) {
-      <p>{{ paragraph }}</p>
+      <p #paragraph>{{ paragraph }}</p>
     }
   </div>
 </div>

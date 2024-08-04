@@ -1,7 +1,7 @@
 <div class="section-content portfolio-section">
   <div class="card-container">
     @for(project of projects; track project) {
-      <div class="card" (click)="toggleActive(project)">
+      <div class="card" #card (click)="toggleActive(project)">
         <div class="card-inner" [class.card-flip]="project.active">
           <div class="card-front">
             {{project.title}}
