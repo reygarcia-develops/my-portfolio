@@ -6,11 +6,12 @@ import { filter } from 'rxjs';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { HeaderComponent } from './header/header.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, PortfolioComponent, AboutMeComponent, CommonModule],
+  imports: [RouterOutlet, HeaderComponent, PortfolioComponent, AboutMeComponent, CommonModule, WelcomeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -86,8 +87,7 @@ export class AppComponent implements AfterViewInit {
       const divider = element.querySelector('.divider') as HTMLElement;
   
       if (entry.isIntersecting) {
-        const index = this.sections?.toArray().findIndex(section => section.nativeElement === entry.target);
-        const titleDelay = index === 0 ? 1.8 : .5; 
+        const titleDelay = .5; 
         const dividerDelay = titleDelay + .5;
   
         if (title) {

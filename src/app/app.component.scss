@@ -8,6 +8,18 @@
   margin: 0 auto;
   padding: 0 25px;
 
+  .welcome-section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 100vh;
+    height: 100vh;
+    padding: 0px;
+    max-width: 490px;
+    margin: 0 auto
+  }
+
   section {
     border-radius: 20px;
     display: flex;
@@ -15,10 +27,6 @@
     flex-direction: column;
     padding: 50px 0;
     position: relative;
-
-    &:first-of-type {
-      padding-top: 25px;
-    }
 
     .title-and-divider {
       display: flex;
@@ -78,9 +86,6 @@
   .main {
     section {
       padding: 100px 0;
-      &:first-of-type {
-        padding-top: 100px;
-      }
     }
   }
 }

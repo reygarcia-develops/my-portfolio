@@ -48,7 +48,6 @@ export class PortfolioComponent {
   }
 
   public addAnimateToPortfolioCards(): void {
-    console.log(this.cards);
     this.cards.forEach((card) => {
       this.renderer.addClass(card.nativeElement, 'animate');
     });

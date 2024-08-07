@@ -1,0 +1,92 @@
+@import '../../variables.scss';
+
+.welcome-container {
+  .main-message {
+    font-size: clamp(40px, 8vw, 80px);
+    opacity: .8;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    width: 0;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 0.15em; /* Width of the caret */
+      background-color: rgba(152, 152, 152, 0.1); /* Caret color */
+      border-radius: 0.1em; /* Rounded edges */
+      animation: blink-caret .5s step-end infinite; /* Blinking effect */
+    }
+
+    &.typing {
+      animation: .5s typing 1s steps(3, end) forwards;
+    }
+
+    &.deleting {
+      animation: .5s delete .5s steps(3, end) backwards;
+    }
+
+    &.final-typing {
+      animation: 1s final-typing .5s steps(7, end) forwards;
+
+    }
+
+    &.visible {
+      overflow: visible;
+      width: 100%;
+
+      &:after {
+        display:none;
+      }
+    }
+  }
+
+  .sub-message {
+    color: $text-color;
+    opacity: 0;
+    transition: 1s opacity .5s ease;
+
+    &.visible {
+      opacity: 1;;
+    }
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 3ch; /* Adjust based on the length of "Hi!" and later "Welcome" */
+  }
+}
+
+@keyframes final-typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 7ch; /* Adjust based on the length of "Hi!" and later "Welcome" */
+  }
+}
+
+@keyframes delete {
+  from {
+    width: 3ch;
+  }
+  to {
+    width: 0;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(152, 152, 152, 0.1); /* Caret color */
+  }
+}

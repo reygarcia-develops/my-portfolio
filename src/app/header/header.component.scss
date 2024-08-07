@@ -13,7 +13,6 @@
   background-color: rgb(18 18 18);
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
   min-height: 80px;
   padding-inline: 50px;
   padding-top: 15px;
@@ -46,7 +45,7 @@
     }
     .subtitle {
       opacity: 0;
-      animation: 0.5s drop-in 0.5s forwards;
+      animation: 0.5s drop-in 0.4s forwards;
     }
   }
 
@@ -65,7 +64,7 @@
       opacity: 0;
 
       animation: drop-in 0.5s forwards;
-      animation-delay: calc(var(--i) * 0.2s);
+      animation-delay: calc(var(--i) * 0.1s);
 
       &:first-of-type {
         --i: 5;
@@ -264,19 +263,18 @@
       li {
         opacity: 0;
         animation: drop-in 0.5s forwards;
-        animation-delay: calc(var(--i) * 0.2s);
 
         &:nth-child(1) {
-          --i: 5;
+          animation-delay: .6s
         }
         &:nth-child(2) {
-          --i: 6;
+          animation-delay: .8s
         }
         &:nth-child(3) {
-          --i: 7;
+          animation-delay: 1s
         }
         &:nth-child(4) {
-          --i: 8;
+          animation-delay: 1.2s
         }
       }
     }
