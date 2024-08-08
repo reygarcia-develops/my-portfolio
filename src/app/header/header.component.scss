@@ -64,18 +64,17 @@
       opacity: 0;
 
       animation: drop-in 0.5s forwards;
-      animation-delay: calc(var(--i) * 0.1s);
 
       &:first-of-type {
-        --i: 5;
+        animation-delay: 0.7s;
         @include linear-gradient-background();
       }
       &:nth-of-type(2) {
-        --i: 6;
+        animation-delay: 0.9s;
         @include linear-gradient-background();
       }
       &:last-of-type {
-        --i: 7;
+        animation-delay: 1s;
         @include linear-gradient-background();
       }
     }

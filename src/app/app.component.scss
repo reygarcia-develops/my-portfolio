@@ -11,13 +11,11 @@
   .welcome-section {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    align-items: flex-start;
+    align-self: center;
     min-height: 100vh;
     height: 100vh;
     padding: 0px;
-    max-width: 490px;
-    margin: 0 auto
+    max-width: 510px;
   }
 
   section {

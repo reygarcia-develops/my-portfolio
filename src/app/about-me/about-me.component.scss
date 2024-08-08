@@ -37,6 +37,7 @@ $delay-increment: 0.2s;
 .summary {
   margin-top: 20px;
   color: $text-color;
+  overflow-x: hidden; // prevents horizontal overflow for the paragraph on page load before the animation
 
   p {
     opacity: 0;;

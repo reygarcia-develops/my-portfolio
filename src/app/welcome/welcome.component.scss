@@ -1,4 +1,5 @@
 @import '../../variables.scss';
+@import '../../mixins.scss';
 
 .welcome-container {
   .main-message {
@@ -47,11 +48,66 @@
   .sub-message {
     color: $text-color;
     opacity: 0;
-    transition: 1s opacity .5s ease;
-
     &.visible {
-      opacity: 1;;
+      --drop-in-start: -20%;
+      animation: drop-in 1s forwards;
     }
+  }
+  .button {
+    background: transparent;
+    border-radius: 55px;
+    border: 0;
+    box-shadow: 6 6px 6px rgba($header-bg-color, 0.5);
+    margin-top: 20px;
+    overflow:hidden;
+    padding: 10px;
+    position:relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 155px;
+
+
+    &:before {
+      @include linear-gradient-background($gradient-start, $gradient-middle, $gradient-end);
+      border-radius: 55px;
+      border: 0;
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 0%;
+      z-index: -1;
+    }
+
+    &.animate {
+      .content {
+        opacity: 1;
+      }
+      &:before {
+        animation: 1s button-animation 1s ease forwards;
+      }
+    }
+
+    &:hover {
+      box-shadow: 6px 6px 6px rgb(0, 0, 0);
+      cursor: pointer;
+      transform: translateY(-5px);
+    }
+
+    .content {
+      opacity: 0;
+      transition: 
+        .5s opacity 1.2s ease,
+    }
+  }
+}
+
+@keyframes button-animation {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 155px;
   }
 }
 

@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, Renderer2, AfterViewIni
 export class WelcomeComponent implements AfterViewInit {
   @ViewChild('mainMessage') mainMessageRef!: ElementRef;
   @ViewChild('subMessage') subMessageRef!: ElementRef;
+  @ViewChild('resume') buttonRef!: ElementRef;
 
   public message: string = 'Hi!';
 
@@ -19,10 +20,12 @@ export class WelcomeComponent implements AfterViewInit {
   ngAfterViewInit() {
     const mainMessageEl = this.mainMessageRef.nativeElement;
     const subMessageEl = this.subMessageRef.nativeElement;
+    const buttonEl = this.buttonRef.nativeElement;
     mainMessageEl.addEventListener('animationend', (event: AnimationEvent) => {
       if (event.animationName.includes('final-typing')) {
         this.renderer.addClass(mainMessageEl, 'visible');
         this.renderer.addClass(subMessageEl, 'visible');
+        this.renderer.addClass(buttonEl, 'animate');
       } else if (event.animationName.includes('delete')) {
         this.message = 'Welcome';
         mainMessageEl.textContent = this.message;
