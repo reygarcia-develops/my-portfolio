@@ -7,11 +7,12 @@ import { AboutMeComponent } from './about-me/about-me.component';
 import { HeaderComponent } from './header/header.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ContactInfoComponent } from "./contact-info/contact-info.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, PortfolioComponent, AboutMeComponent, CommonModule, WelcomeComponent],
+  imports: [RouterOutlet, HeaderComponent, PortfolioComponent, AboutMeComponent, CommonModule, WelcomeComponent, ContactInfoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -19,8 +20,6 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('contentSection') sections!: QueryList<ElementRef>
   @ViewChild(AboutMeComponent) aboutMe!: AboutMeComponent;
   @ViewChild(PortfolioComponent) portfolio!: PortfolioComponent;
-
-  public email = 'reygarcia.develops@gmail.com'
 
   constructor(private router: Router) {}
 

@@ -1,0 +1,100 @@
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+.side-right-element {
+  right: 20px;
+}
+.side-left-element {
+  left: 20px;
+}
+
+.side-right-element, .side-left-element {
+  color: #989898;
+  position: fixed;
+  bottom: 0;
+  width: 40px;
+  z-index: 1;
+  display: none;
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    opacity: 0;
+    animation: fade-in 0.5s forwards;
+
+    li {
+      margin-bottom: 20px;
+      a {
+        .instagram {
+          stroke-width: 1;
+        }
+        .github {
+          stroke-width: 0.2;
+        }
+        .facebook {
+          stroke-width: 2;
+        }
+        svg {
+          width: 20px;
+          height: 20px;
+          vertical-align: middle;
+          stroke: #989898;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          transition: 
+            stroke 0.5s ease,
+            transform 0.3s ease;
+
+  
+          &:hover {
+            stroke: #fff;
+            transform: translateY(-5px);
+          }
+        }
+      }
+    }
+
+    .email {
+      font-size: 12px;
+      letter-spacing: .01em;
+      margin: 20px auto;
+      padding: 10px;
+      writing-mode: vertical-lr;
+      transition: 
+        color 0.3s ease,
+        transform 0.3s ease;
+
+      &:hover {
+        color: #fff;
+        transform: translateY(-5px);
+      }
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      width: 1px;
+      height: 90px;
+      margin: 0px auto;
+      @include linear-gradient-background(180deg);
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  .side-right-element, .side-left-element {
+    display: block;
+  }
+}
+
+@media (min-width: 1080px) {
+  .side-right-element {
+    right: 40px;
+  }
+  .side-left-element {
+    left: 40px;
+  }
+  
+}
