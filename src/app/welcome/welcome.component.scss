@@ -68,7 +68,7 @@
 
 
     &:before {
-      @include linear-gradient-background($gradient-start, $gradient-middle, $gradient-end);
+      @include linear-gradient-background();
       border-radius: 55px;
       border: 0;
       content: '';

@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild(AboutMeComponent) aboutMe!: AboutMeComponent;
   @ViewChild(PortfolioComponent) portfolio!: PortfolioComponent;
 
-  public title = 'my-portfolio';
+  public email = 'reygarcia.develops@gmail.com'
 
   constructor(private router: Router) {}
 
