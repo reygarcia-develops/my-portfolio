@@ -9,7 +9,7 @@
 }
 
 .side-right-element, .side-left-element {
-  color: #989898;
+  color: $text-color;
   position: fixed;
   bottom: 0;
   width: 40px;
@@ -26,34 +26,6 @@
 
     li {
       margin-bottom: 20px;
-      a {
-        .instagram {
-          stroke-width: 1;
-        }
-        .github {
-          stroke-width: 0.2;
-        }
-        .facebook {
-          stroke-width: 2;
-        }
-        svg {
-          width: 20px;
-          height: 20px;
-          vertical-align: middle;
-          stroke: #989898;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-          transition: 
-            stroke 0.5s ease,
-            transform 0.3s ease;
-
-  
-          &:hover {
-            stroke: #fff;
-            transform: translateY(-5px);
-          }
-        }
-      }
     }
 
     .email {
