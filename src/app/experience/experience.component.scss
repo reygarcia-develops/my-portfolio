@@ -1,0 +1,54 @@
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+.category-section {
+  align-items: center;
+  gap: 50px;
+  flex-direction: column;
+}
+
+.category-bar {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  gap: 30px;
+}
+
+.category {
+  flex: 1;
+  cursor: pointer;
+  position: relative;
+  min-width: 100px;
+  text-align: center;
+  z-index: 1;
+  transition: color 0.3s ease;
+  &.selected {
+    &:after {
+      transform: scaleX(1);
+    }
+  }
+
+  &:after {
+    animation: megatron-header-underline 0.5s linear infinite;
+    @include linear-gradient-background();
+
+    background-size: 100% 100%;
+    border-radius: 2px;
+    bottom: -15px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transform-origin: bottom left;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+    width: 100%;
+
+  }
+}
+
+.skills-list-container {
+  display: flex;
+  overflow: hidden;
+  justify-content: space-around;
+}

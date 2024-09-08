@@ -8,11 +8,12 @@ import { HeaderComponent } from './header/header.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ContactInfoComponent } from "./contact-info/contact-info.component";
+import { ExperienceComponent } from './experience/experience.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, PortfolioComponent, AboutMeComponent, CommonModule, WelcomeComponent, ContactInfoComponent],
+  imports: [RouterOutlet, HeaderComponent, PortfolioComponent, AboutMeComponent, CommonModule, WelcomeComponent, ContactInfoComponent, ExperienceComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -20,15 +21,17 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('contentSection') sections!: QueryList<ElementRef>
   @ViewChild(AboutMeComponent) aboutMe!: AboutMeComponent;
   @ViewChild(PortfolioComponent) portfolio!: PortfolioComponent;
+  @ViewChild(ExperienceComponent) experience!: ExperienceComponent;
+
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    // this.router.events.pipe(
+    //   filter(event => event instanceof NavigationEnd)
+    // ).subscribe(() => {
+    //   window.scrollTo({ top: 0, behavior: 'smooth' });
+    // });
   }
 
   ngAfterViewInit(): void {
@@ -45,7 +48,7 @@ export class AppComponent implements AfterViewInit {
     }
   }
   
-  navigateToSection(sectionId: string): void {
+  public navigateToSection(sectionId: string): void {
     const element = document.getElementById(sectionId);
     if (element) {
       const offset = 60;
@@ -110,11 +113,8 @@ export class AppComponent implements AfterViewInit {
             this.portfolio.addAnimateToPortfolioCards();
             break;
           }
-          case 'contactMe': {
-            break;
-          }
           case 'experience': {
-            break;
+            this.experience.selectCategory();
           }
         }
       }

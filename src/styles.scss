@@ -28,9 +28,10 @@ body {
   line-height: 1.5;
   margin: 0px;
 }
+
 a {
   text-decoration: none;
-  color: #989898;
+  color: $text-color;
 }
 
 ol, ul {
@@ -55,6 +56,39 @@ ol, ul {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+
+.social-li {
+  a {
+    .instagram {
+      stroke-width: 1;
+    }
+    .github {
+      stroke-width: 0.2;
+    }
+    .facebook {
+      stroke-width: 2;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      stroke: $text-color;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: 
+        stroke 0.5s ease,
+        transform 0.3s ease;
+
+
+      &:hover, 
+      &:focus {
+        stroke: #fff;
+        transform: translateY(-5px);
+      }
+    }
+  }
 }
 
 @media (min-width: 1080px) {
@@ -88,3 +122,4 @@ ol, ul {
     opacity: 1;
   }
 }
+

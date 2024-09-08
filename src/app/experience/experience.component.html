@@ -1,0 +1,11 @@
+<div class="section-content category-section">
+  <div class="category-bar">
+    <div *ngFor="let category of categories" class="category" [class.selected]="selectedCategory === category.name" (click)="selectCategory(category.name)">
+      {{ category.name | titlecase }}
+    </div>
+  </div>
+  <div class="skills-list-container">
+    @for (category of categories; track category) {
+    }
+  </div>
+</div>

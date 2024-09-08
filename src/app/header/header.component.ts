@@ -33,7 +33,6 @@ export class HeaderComponent implements AfterViewInit {
   public navList: NavItems[] = [
     {label:'About me', id: 'aboutMe'},
     {label: 'Portfolio', id: 'portfolio'},
-    {label: 'Contact me', id: 'contactMe'},
     {label: 'Experience', id: 'experience'}
   ];
 
