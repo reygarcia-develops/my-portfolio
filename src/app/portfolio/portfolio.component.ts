@@ -43,10 +43,6 @@ export class PortfolioComponent {
   ];
   constructor(private renderer: Renderer2) {}
 
-  public toggleActive(project: Project): void {
-    project.active = !project.active;
-  }
-
   public addAnimateToPortfolioCards(): void {
     this.cards.forEach((card) => {
       this.renderer.addClass(card.nativeElement, 'animate');

@@ -1,18 +1,14 @@
 <div class="section-content portfolio-section">
   <div class="card-container">
     @for(project of projects; track project) {
-      <div class="card" #card (click)="toggleActive(project)">
-        <div class="card-inner" [class.card-flip]="project.active">
-          <div class="card-front">
-            {{project.title}}
-          </div>
-          <div class="card-back">
-            @for(summary of project.summary; track summary) {
-              <p>
-                {{summary}}
-              </p>
-            }
-          </div>
+      <div class="card" #card>
+        <div class="card-inner">
+          <h3>{{project.title}}</h3>
+          @for(summary of project.summary; track summary) {
+            <p class="description">
+              {{summary}}
+            </p>
+          }
         </div>
       </div>
     }
