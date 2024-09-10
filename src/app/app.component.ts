@@ -27,11 +27,11 @@ export class AppComponent implements AfterViewInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // this.router.events.pipe(
-    //   filter(event => event instanceof NavigationEnd)
-    // ).subscribe(() => {
-    //   window.scrollTo({ top: 0, behavior: 'smooth' });
-    // });
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
   ngAfterViewInit(): void {
@@ -73,6 +73,7 @@ export class AppComponent implements AfterViewInit {
     }
 
     const observer = new IntersectionObserver(this.handleIntersect.bind(this), options);
+
     this.sections?.forEach((section, index) => {
       const divider = section.nativeElement.querySelector('.divider') as HTMLElement;
       if (divider) {
@@ -115,6 +116,7 @@ export class AppComponent implements AfterViewInit {
           }
           case 'experience': {
             this.experience.selectCategory();
+            break;
           }
         }
       }

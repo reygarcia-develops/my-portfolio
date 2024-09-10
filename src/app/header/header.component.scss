@@ -132,7 +132,7 @@
         }
 
         &:hover,
-        &:focus-visible {
+        &:focus {
           color: $hover-text-color;
 
           &::after {

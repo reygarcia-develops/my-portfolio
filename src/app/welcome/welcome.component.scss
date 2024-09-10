@@ -4,7 +4,7 @@
 .welcome-container {
   .main-message {
     font-size: clamp(40px, 8vw, 80px);
-    opacity: .8;
+    color: $welcom-text;
     white-space: nowrap;
     overflow: hidden;
     position: relative;

@@ -16,53 +16,82 @@ $delay-increment: 0.2s;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 20px;
 
   .card {
     aspect-ratio: 1;
     background-color: #1e1e1e;
     border-radius: 4px;
     box-sizing: border-box;
-    cursor: pointer;
-    max-width: 300px;
-    min-width: 256px;
+    max-width: 325px;
     opacity: 0;
     padding: 30px;
     position: relative;
     width: 100%;
-    transform: translateY(-20%);
-    transition:
-      transform 0.5s ease,
-      opacity 0.5s ease;
-    
-    &:nth-of-type(3),
-    &:nth-of-type(4) {
-      transform: translateY(20%);
-    }
+    transition: transform 0.3s ease;
 
     &.animate {
-      opacity: 1;
-      transform: translateY(0%);
+      animation: slide-and-fade-in 0.5s ease forwards;
 
-      @for $i from 1 through 4 {
+      @for $i from 1 through 6 {
         &:nth-of-type(#{$i}) {
-          transition-delay: $base-delay + $delay-increment * ($i - 1);
+          animation-delay: $base-delay + $delay-increment * ($i - 1);
+        }
+      }
+    }
+
+    &:hover,
+    &:focus {
+      transform: translateY(-10px);
+
+      .card-inner {
+        h3 {
+          @include linear-gradient-background();
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
       }
     }
   }
 
   .card-inner {
+    display: flex ;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    h3 {
+      font-weight: normal;
+      transition: background 0.3s linear;
+    }
+
     .description {
+      color: $text-color;
       font-size: .8rem;
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-start;
+      color: $sub-text-color;
+
+      span {
+        font-size: .65rem;
+      }
     }
   }
 }
 
-@media (min-width: 1008px) {
-  .card-container {
-    .card {
-      min-width: 400px;
-    }
+@keyframes slide-and-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
   }
 }
