@@ -60,6 +60,7 @@ $delay-increment: 0.2s;
 
 @media (min-width: 1080px) {
   .image-content {
+    color: $welcom-text;
     .avatar {
       max-width: 200px;
     }

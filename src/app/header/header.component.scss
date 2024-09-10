@@ -104,15 +104,12 @@
 
     .nav-list {
       display: flex;
+      gap: 30px;
 
       li {
         color: $text-color;
         position: relative;
-        transition: color 0.3s ease;
-
-        &:not(:last-child) {
-          margin-right: 25px;
-        }
+        cursor: pointer;
 
         &::after {
           animation: megatron-header-underline 0.5s linear infinite;
@@ -133,7 +130,10 @@
 
         &:hover,
         &:focus {
-          color: $hover-text-color;
+          a {
+            transition: color 0.3s ease;
+            color: $hover-text-color !important;
+          }
 
           &::after {
             transform: scaleX(1);
